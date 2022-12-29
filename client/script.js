@@ -1,12 +1,13 @@
-import bot from "./assets/bot.svg";
-import user from "./assets/user.svg";
+import botImg from "./assets/bot.svg";
+import userImg from "./assets/user.svg";
 
 const form = document.querySelector("form");
 const chatContainer = document.querySelector("#chat_container");
 
 let loadInterval;
 
-function loader(element) {
+//Function to load three dots while fetching the answer
+const loader = (element) => {
   element.textContent = "";
 
   loadInterval = setInterval(() => {
@@ -16,9 +17,10 @@ function loader(element) {
       element.textContent = "";
     }
   }, 300);
-}
+};
 
-function typeText(element, text) {
+//Function to print the answer letter by letter
+const typeText = (element, text) => {
   let index = 0;
 
   let interval = setInterval(() => {
@@ -29,22 +31,26 @@ function typeText(element, text) {
       clearInterval(interval);
     }
   }, 20);
-}
+};
 
-function generateUniqueID() {
+//Function to get unique ID
+const generateUniqueID = () => {
   const timeStamp = Date.now();
   const randomNum = Math.random();
   const hexaDecString = randomNum.toString(16);
 
   return `id-${timeStamp}-${hexaDecString}`;
-}
+};
 
-function chatStripe(isAI, value, uniqueID) {
+//Function to create Stripe area for question and ansewer
+const chatStripe = (isAI, value, uniqueID) => {
   return `
     <div class="wrapper ${isAI && "ai"}">
       <div class="chat">
         <div class="profile">
-          <img src="${isAI ? bot : user}" alt="${isAI ? "bot" : "user"}" />
+          <img src="${isAI ? botImg : userImg}" alt="${
+    isAI ? "bot-Img" : "user-Img"
+  }" />
         </div>
         <div class="message ${!isAI && "user"}" id=${uniqueID}>
           ${value}
@@ -52,8 +58,9 @@ function chatStripe(isAI, value, uniqueID) {
       </div>
     </div>
     `;
-}
+};
 
+//Function to handle form Submit
 const handleSubmit = async (e) => {
   e.preventDefault();
 
@@ -99,6 +106,7 @@ const handleSubmit = async (e) => {
   }
 };
 
+//Call the formMethods on enter or submit
 form.addEventListener("submit", handleSubmit);
 form.addEventListener("keyup", (e) => {
   if (e.keyCode === 13) {
