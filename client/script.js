@@ -74,7 +74,7 @@ const handleSubmit = async (e) => {
   loader(messageDiv);
 
   //fetch data from server
-  const response = await fetch("https://openai-chat-0zfs.onrender.com", {
+  const response = await fetch("https://openai-chat-0zfs.onrender.com/", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
