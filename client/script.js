@@ -95,7 +95,7 @@ const handleSubmit = async (e) => {
   } else {
     const error = await response.text();
     messageDiv.innerHTML = "something went wrong";
-    alert(error);
+    console.log(error);
   }
 };
 
